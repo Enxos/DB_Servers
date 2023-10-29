@@ -1,12 +1,12 @@
 # Plan
 
-# autokolcsonzo by FCOMHO
+## autokolcsonzo by FCOMHO
 
 postgresql - be irva elvileg alap tabla, colum, row is supported, but object base db.
 
 objects?
 
-tables:
+### tables:
  - autok - cars
  - kolcsonzok - users - 1diots
  - kolcsonzesek - rents - rentals?
@@ -14,14 +14,14 @@ tables:
  ++
  - locations - telephelyek?
 
-maybe tables:
+#### maybe tables:
  - history table?
  - prices table?
 
 
-table plans:
+### table plans:
 
-cars table
+#### cars table
   - uniq ID
   - rendszam - current - string
   - old rendszamok - array / list? - in case there is a change
@@ -32,7 +32,7 @@ cars table
   - category - some kind of categorization for the car size and price structure for renting.
 
 
-users table
+#### users table
  - ID
  - email
  - username?
@@ -42,7 +42,7 @@ users table
  - contact phone Nr.
  - 
 
-rents table
+#### rents table
  - uniq ID - key
  - foreign key - Cars ID // not mandatory rentals can be stopped and continued later without selecting the car first.
  - foreign key - User ID //mandatory
