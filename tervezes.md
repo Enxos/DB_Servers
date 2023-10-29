@@ -10,13 +10,18 @@ tables:
  - autok - cars
  - kolcsonzok - users - 1diots
  - kolcsonzesek - rents - rentals?
+
  ++
  - locations - telephelyek?
 
- -- history table?
- -- prices table?
+maybe tables:
+ - history table?
+ - prices table?
 
- cars table
+
+table plans:
+
+cars table
   - uniq ID
   - rendszam - current - string
   - old rendszamok - array / list? - in case there is a change
