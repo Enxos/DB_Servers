@@ -3,4 +3,4 @@
 GDE Beadando
 
 by Rapolthy Daniel
-version 0.1b
+version 0.1c
