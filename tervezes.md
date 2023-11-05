@@ -54,7 +54,8 @@ objects?
  - pick up location
  - drop off location
 
-#### prices table
+#### prices table:w
+
  - uniq ID - key - category ID
  - Category name
  - Category Price
