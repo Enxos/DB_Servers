@@ -29,7 +29,7 @@ objects?
   - type - manufacturer
   - model - konkret tipusmegnevezes
   - evjarat - manufacturing year
-  - category - some kind of categorization for the car size and price structure for renting.
+  - category ID - foreign key - some kind of categorization for the car size and price structure for renting.
 
 
 #### users table
@@ -54,7 +54,13 @@ objects?
  - pick up location
  - drop off location
 
-
+#### prices table
+ - uniq ID - key - category ID
+ - Category name
+ - Category Price
+ - 
+ - In the feature, usage based automatic price adjusting.
+ - In the feature, date based changable manual price fluctuation variable.
 
 ### lekerdezes tervek:
  - autokat hanyszor bereltek?
