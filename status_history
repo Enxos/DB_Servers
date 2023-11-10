@@ -1,0 +1,388 @@
+Microsoft Windows [Version 10.0.22621.2428]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Bob>docker pull postgres:latest
+latest: Pulling from library/postgres
+578acb154839: Pull complete
+8a9a8dd839ec: Pull complete
+9a28d48e5d8f: Pull complete
+a98e37f54ea5: Pull complete
+7d200efb5208: Pull complete
+fe0ac8d1ec65: Pull complete
+85bf04d4b2a2: Pull complete
+b96ddf21ebd6: Pull complete
+b2983ba85293: Pull complete
+3cbe242a7b19: Pull complete
+0a1ff5212575: Pull complete
+f560313d0d85: Pull complete
+fd463ca121fb: Pull complete
+Digest: sha256:a80d0c1b119cf3d6bab27f72782f16e47ab8534ced937fa813ec2ab26e1fd81e
+Status: Downloaded newer image for postgres:latest
+docker.io/library/postgres:latest
+
+What's Next?
+  1. Sign in to your Docker account → docker login
+  2. View a summary of image vulnerabilities and recommendations → docker scout quickview postgres:latest
+
+C:\Users\Bob>
+
+
+// This generated a new image, but no container listed just yet.
+
+
+C:\Users\Bob>docker run --name pg2 -e POSTGRES_PASSWORD=postgres -p 5488:5432 -d postgres:latest
+08953b9619bafe9b1e6c7137d6e7d9883e1133f3d12a4ac70c313467bab5a70b
+
+// This created the new container pg2 and is running already.
+
+docker stop pg2
+docker start pg2
+
+// to control status outside of the Docker Desktop app.
+
+C:\Users\Bob>docker start pg2
+pg2
+
+C:\Users\Bob>docker -it pg2 psql -U postgres
+unknown shorthand flag: 'i' in -it
+See 'docker --help'.
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Common Commands:
+  run         Create and run a new container from an image
+  exec        Execute a command in a running container
+  ps          List containers
+  build       Build an image from a Dockerfile
+  pull        Download an image from a registry
+  push        Upload an image to a registry
+  images      List images
+  login       Log in to a registry
+  logout      Log out from a registry
+  search      Search Docker Hub for images
+  version     Show the Docker version information
+  info        Display system-wide information
+
+Management Commands:
+  builder     Manage builds
+  buildx*     Docker Buildx (Docker Inc., v0.11.2-desktop.5)
+  compose*    Docker Compose (Docker Inc., v2.23.0-desktop.1)
+  container   Manage containers
+  context     Manage contexts
+  dev*        Docker Dev Environments (Docker Inc., v0.1.0)
+  extension*  Manages Docker extensions (Docker Inc., v0.2.20)
+  image       Manage images
+  init*       Creates Docker-related starter files for your project (Docker Inc., v0.1.0-beta.9)
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  plugin      Manage plugins
+  sbom*       View the packaged-based Software Bill Of Materials (SBOM) for an image (Anchore Inc., 0.6.0)
+  scan*       Docker Scan (Docker Inc., v0.26.0)
+  scout*      Docker Scout (Docker Inc., v1.0.9)
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Swarm Commands:
+  swarm       Manage Swarm
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  wait        Block until one or more containers stop, then print their exit codes
+
+Global Options:
+      --config string      Location of client config files (default
+                           "C:\\Users\\Bob\\.docker")
+  -c, --context string     Name of the context to use to connect to the
+                           daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket to connect to
+  -l, --log-level string   Set the logging level ("debug", "info",
+                           "warn", "error", "fatal") (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default
+                           "C:\\Users\\Bob\\.docker\\ca.pem")
+      --tlscert string     Path to TLS certificate file (default
+                           "C:\\Users\\Bob\\.docker\\cert.pem")
+      --tlskey string      Path to TLS key file (default
+                           "C:\\Users\\Bob\\.docker\\key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Run 'docker COMMAND --help' for more information on a command.
+
+For more help on how to use Docker, head to https://docs.docker.com/go/guides/
+
+
+C:\Users\Bob>
+
+// by default the login ofc does not work... First problem.
+
+By default the container gets 16GB memory???
+Does 0% cpu usage after boot.
+
+It's Inspect config:
+{
+	"Id": "08953b9619bafe9b1e6c7137d6e7d9883e1133f3d12a4ac70c313467bab5a70b",
+	"Created": "2023-11-10T17:01:16.256204827Z",
+	"Path": "docker-entrypoint.sh",
+	"Args": [
+		"postgres"
+	],
+	"State": {
+		"Status": "running",
+		"Running": true,
+		"Paused": false,
+		"Restarting": false,
+		"OOMKilled": false,
+		"Dead": false,
+		"Pid": 1108,
+		"ExitCode": 0,
+		"Error": "",
+		"StartedAt": "2023-11-10T17:02:02.373455745Z",
+		"FinishedAt": "2023-11-10T17:01:56.812157969Z"
+	},
+	"Image": "sha256:fbd1be2cbb1f55a77e9e4124c36f4f7e7d9370de26d4325688cc953008984c81",
+	"ResolvConfPath": "/var/lib/docker/containers/08953b9619bafe9b1e6c7137d6e7d9883e1133f3d12a4ac70c313467bab5a70b/resolv.conf",
+	"HostnamePath": "/var/lib/docker/containers/08953b9619bafe9b1e6c7137d6e7d9883e1133f3d12a4ac70c313467bab5a70b/hostname",
+	"HostsPath": "/var/lib/docker/containers/08953b9619bafe9b1e6c7137d6e7d9883e1133f3d12a4ac70c313467bab5a70b/hosts",
+	"LogPath": "/var/lib/docker/containers/08953b9619bafe9b1e6c7137d6e7d9883e1133f3d12a4ac70c313467bab5a70b/08953b9619bafe9b1e6c7137d6e7d9883e1133f3d12a4ac70c313467bab5a70b-json.log",
+	"Name": "/pg2",
+	"RestartCount": 0,
+	"Driver": "overlay2",
+	"Platform": "linux",
+	"MountLabel": "",
+	"ProcessLabel": "",
+	"AppArmorProfile": "",
+	"ExecIDs": [
+		"09af1ea4e2fc3d0b14f32d7821c4f91e4990ff7153ad93708bb4fa8fc5a8e443"
+	],
+	"HostConfig": {
+		"Binds": null,
+		"ContainerIDFile": "",
+		"LogConfig": {
+			"Type": "json-file",
+			"Config": {}
+		},
+		"NetworkMode": "default",
+		"PortBindings": {
+			"5432/tcp": [
+				{
+					"HostIp": "",
+					"HostPort": "5488"
+				}
+			]
+		},
+		"RestartPolicy": {
+			"Name": "no",
+			"MaximumRetryCount": 0
+		},
+		"AutoRemove": false,
+		"VolumeDriver": "",
+		"VolumesFrom": null,
+		"ConsoleSize": [
+			30,
+			120
+		],
+		"CapAdd": null,
+		"CapDrop": null,
+		"CgroupnsMode": "host",
+		"Dns": [],
+		"DnsOptions": [],
+		"DnsSearch": [],
+		"ExtraHosts": null,
+		"GroupAdd": null,
+		"IpcMode": "private",
+		"Cgroup": "",
+		"Links": null,
+		"OomScoreAdj": 0,
+		"PidMode": "",
+		"Privileged": false,
+		"PublishAllPorts": false,
+		"ReadonlyRootfs": false,
+		"SecurityOpt": null,
+		"UTSMode": "",
+		"UsernsMode": "",
+		"ShmSize": 67108864,
+		"Runtime": "runc",
+		"Isolation": "",
+		"CpuShares": 0,
+		"Memory": 0,
+		"NanoCpus": 0,
+		"CgroupParent": "",
+		"BlkioWeight": 0,
+		"BlkioWeightDevice": [],
+		"BlkioDeviceReadBps": [],
+		"BlkioDeviceWriteBps": [],
+		"BlkioDeviceReadIOps": [],
+		"BlkioDeviceWriteIOps": [],
+		"CpuPeriod": 0,
+		"CpuQuota": 0,
+		"CpuRealtimePeriod": 0,
+		"CpuRealtimeRuntime": 0,
+		"CpusetCpus": "",
+		"CpusetMems": "",
+		"Devices": [],
+		"DeviceCgroupRules": null,
+		"DeviceRequests": null,
+		"MemoryReservation": 0,
+		"MemorySwap": 0,
+		"MemorySwappiness": null,
+		"OomKillDisable": false,
+		"PidsLimit": null,
+		"Ulimits": null,
+		"CpuCount": 0,
+		"CpuPercent": 0,
+		"IOMaximumIOps": 0,
+		"IOMaximumBandwidth": 0,
+		"MaskedPaths": [
+			"/proc/asound",
+			"/proc/acpi",
+			"/proc/kcore",
+			"/proc/keys",
+			"/proc/latency_stats",
+			"/proc/timer_list",
+			"/proc/timer_stats",
+			"/proc/sched_debug",
+			"/proc/scsi",
+			"/sys/firmware"
+		],
+		"ReadonlyPaths": [
+			"/proc/bus",
+			"/proc/fs",
+			"/proc/irq",
+			"/proc/sys",
+			"/proc/sysrq-trigger"
+		]
+	},
+	"GraphDriver": {
+		"Data": {
+			"LowerDir": "/var/lib/docker/overlay2/7e6ac13a76a2115881d1b47c2dd4b4ea73e6f18eacb127c16e8550fd1b473c81-init/diff:/var/lib/docker/overlay2/1822d14e4d9d107afe0596096ffb687727b391238b782a2c6427cbbf3a7b077a/diff:/var/lib/docker/overlay2/9f24d3825b82495e046d2d509fce498be6537fa2f22acfb9e017c8f0426a095b/diff:/var/lib/docker/overlay2/5d620ccee3d0f0bd78625432aff397d234b078060bd05ee8249209abb8cfa821/diff:/var/lib/docker/overlay2/cc7213fbb8adac4f88f41c67fb664faab7583cc74344090ee95a45e7db95599d/diff:/var/lib/docker/overlay2/567b254a425f854a50faf82c14f37421dafdcf6f58ad4903a7b109f4842e3eec/diff:/var/lib/docker/overlay2/399ca45499ef65260f8fb67f722417bda6b639c8430c1a68ae3235ea958b54ad/diff:/var/lib/docker/overlay2/a76d9964882c889a87e0c8dff4247a35cf358bffb4878654b5ad8314145078b9/diff:/var/lib/docker/overlay2/c26f9aa0cd206fd3f97dcca85fc4df7b2f962be05a85c6a07f7d55c7af030ec5/diff:/var/lib/docker/overlay2/e7b64f98351be16da56c0cb618a7140273566100db3848aa69cb505ecda13f46/diff:/var/lib/docker/overlay2/6a38274882d0aaeb4219bb6988901c1f979e8545ad360ef37f11d4026cac9d08/diff:/var/lib/docker/overlay2/8af72e25eec13c11834453379045a03a2cc9d909ce2a083dc7df5c8888a4e1c6/diff:/var/lib/docker/overlay2/8f82dac3bf087af368f0db56f1eebce44c74e9db0144c17bd12f6f13b4b473ea/diff:/var/lib/docker/overlay2/191d064a995fc9863ca45b2855a8d12c93a134a1055b70431251b36222ac7c79/diff",
+			"MergedDir": "/var/lib/docker/overlay2/7e6ac13a76a2115881d1b47c2dd4b4ea73e6f18eacb127c16e8550fd1b473c81/merged",
+			"UpperDir": "/var/lib/docker/overlay2/7e6ac13a76a2115881d1b47c2dd4b4ea73e6f18eacb127c16e8550fd1b473c81/diff",
+			"WorkDir": "/var/lib/docker/overlay2/7e6ac13a76a2115881d1b47c2dd4b4ea73e6f18eacb127c16e8550fd1b473c81/work"
+		},
+		"Name": "overlay2"
+	},
+	"Mounts": [
+		{
+			"Type": "volume",
+			"Name": "c756d77b096fc65f53e35e3b931d6e4ca86eb9b0de1f828c16a3763848367ff2",
+			"Source": "/var/lib/docker/volumes/c756d77b096fc65f53e35e3b931d6e4ca86eb9b0de1f828c16a3763848367ff2/_data",
+			"Destination": "/var/lib/postgresql/data",
+			"Driver": "local",
+			"Mode": "",
+			"RW": true,
+			"Propagation": ""
+		}
+	],
+	"Config": {
+		"Hostname": "08953b9619ba",
+		"Domainname": "",
+		"User": "",
+		"AttachStdin": false,
+		"AttachStdout": false,
+		"AttachStderr": false,
+		"ExposedPorts": {
+			"5432/tcp": {}
+		},
+		"Tty": false,
+		"OpenStdin": false,
+		"StdinOnce": false,
+		"Env": [
+			"POSTGRES_PASSWORD=postgres",
+			"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/16/bin",
+			"GOSU_VERSION=1.16",
+			"LANG=en_US.utf8",
+			"PG_MAJOR=16",
+			"PG_VERSION=16.0-1.pgdg120+1",
+			"PGDATA=/var/lib/postgresql/data"
+		],
+		"Cmd": [
+			"postgres"
+		],
+		"Image": "postgres:latest",
+		"Volumes": {
+			"/var/lib/postgresql/data": {}
+		},
+		"WorkingDir": "",
+		"Entrypoint": [
+			"docker-entrypoint.sh"
+		],
+		"OnBuild": null,
+		"Labels": {},
+		"StopSignal": "SIGINT"
+	},
+	"NetworkSettings": {
+		"Bridge": "",
+		"SandboxID": "ade48bb0209cf0f62ba6b756db8df6a3fcf14e76fb60593e021f1eebca1fad79",
+		"HairpinMode": false,
+		"LinkLocalIPv6Address": "",
+		"LinkLocalIPv6PrefixLen": 0,
+		"Ports": {
+			"5432/tcp": [
+				{
+					"HostIp": "0.0.0.0",
+					"HostPort": "5488"
+				}
+			]
+		},
+		"SandboxKey": "/var/run/docker/netns/ade48bb0209c",
+		"SecondaryIPAddresses": null,
+		"SecondaryIPv6Addresses": null,
+		"EndpointID": "97680ca2b1d70dcfeae6660eb81fd07fc273a15b29ff7e9e2e167be59ce6254e",
+		"Gateway": "172.17.0.1",
+		"GlobalIPv6Address": "",
+		"GlobalIPv6PrefixLen": 0,
+		"IPAddress": "172.17.0.2",
+		"IPPrefixLen": 16,
+		"IPv6Gateway": "",
+		"MacAddress": "02:42:ac:11:00:02",
+		"Networks": {
+			"bridge": {
+				"IPAMConfig": null,
+				"Links": null,
+				"Aliases": null,
+				"NetworkID": "9e47675f8bf94b7cfdf38f29ece8ff3b7aa18377ab3bb611c42264717afd5406",
+				"EndpointID": "97680ca2b1d70dcfeae6660eb81fd07fc273a15b29ff7e9e2e167be59ce6254e",
+				"Gateway": "172.17.0.1",
+				"IPAddress": "172.17.0.2",
+				"IPPrefixLen": 16,
+				"IPv6Gateway": "",
+				"GlobalIPv6Address": "",
+				"GlobalIPv6PrefixLen": 0,
+				"MacAddress": "02:42:ac:11:00:02",
+				"DriverOpts": null
+			}
+		}
+	}
+}
