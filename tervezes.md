@@ -1,5 +1,28 @@
 # Plan
 
+F:\School\GDF\db_servers_2023_2
+
+Beadandó feladat:
+- adatbázis tervezés (indexek stb)
+- SQL insertek megírása
+- lekérdezések megírása
+- triggerek megírása
+- tárolt eljárások megírása
+- adatbázis teljesítmény analízis
+
+Github repo példákkal:
+- https://github.com/bogaarongde/gde_adabazis
+
+PostgreSQL - most trusted name in open source relational db's.. ?:O
+started in 1986
+
+tables, columns n rows... but actually object based db with custom data types for objects.
+
+query's to be put in stored procedures.
+
+local db or free cloud solution with NEON?!
+
+
 ## autokolcsonzo by FCOMHO
 
 postgresql - be irva elvileg alap tabla, colum, row is supported, but object base db.
