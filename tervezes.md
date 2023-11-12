@@ -22,6 +22,7 @@ query's to be put in stored procedures.
 
 local db or free cloud solution with NEON?!
 
+TODO: add "megye"?
 
 ## autokolcsonzo by FCOMHO
 
