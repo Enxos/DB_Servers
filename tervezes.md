@@ -32,7 +32,7 @@ objects?
 
 ### tables:
  - autok - cars
- - kolcsonzok - users - 1diots
+ - kolcsonzok - users - 1diots -> Felhasznalok
  - kolcsonzesek - rents - rentals?
 
  ++
