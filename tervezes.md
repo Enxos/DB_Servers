@@ -43,9 +43,9 @@ objects?
  - prices table?
 
 
-### table plans:
+### Table plans:
 
-#### cars table
+#### Autok table
   - uniq ID
   - rendszam - current - string
   - old rendszamok - array / list? - in case there is a change
@@ -54,9 +54,9 @@ objects?
   - model - konkret tipusmegnevezes
   - evjarat - manufacturing year
   - category ID - foreign key - some kind of categorization for the car size and price structure for renting.
+  - status field - a mai nappon epp hol van ileltve milyen allapotban van az auto, daily refresh a kolcsonzesekbol, ha ott nem szerepel a kocsi akkor location alapjan "available" ??? 
 
-
-#### users table
+#### Felhasznalok table
  - ID
  - email
  - username?
@@ -67,7 +67,7 @@ objects?
  - 
 
 
-#### rents table
+#### kolcsonzesek table
  - uniq ID - key
  - foreign key - Cars ID // not mandatory rentals can be stopped and continued later without selecting the car first.
  - foreign key - User ID //mandatory
@@ -78,11 +78,20 @@ objects?
  - pick up location
  - drop off location
 
-#### prices table:w
+#### helyszinek table
+ - uniq ID - key - helyszin_ID
+ - leado hely?
+ - Felvevo hely?
+ - Auto kapacitas
+ - jelenlegi autok szama
+ - Hogy oldom meg idoben, hogy nezze mikor hol van keszlet / hely autot leadni/felvenni?
+
+
+#### KategoriaArak table:w
 
  - uniq ID - key - category ID
- - Category name
- - Category Price
+ - Category name -> kategoria_nev
+ - Category Price -> kategoria_ar
  - 
  - In the feature, usage based automatic price adjusting.
  - In the feature, date based changable manual price fluctuation variable.
