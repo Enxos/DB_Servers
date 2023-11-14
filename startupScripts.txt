@@ -35,6 +35,15 @@ CREATE TABLE person (
     date of birth TIMESTAMP
 );
 
+DROP TABLE person;
+
+CREATE TABLE person (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    gender VARCHAR (6) NOT NULL,
+    date_of_birth DATE NOT NULL);
+    
 Datatypes:
 https://www.postgresql.org/docs/current/datatype.html
 
@@ -42,3 +51,28 @@ https://www.postgresql.org/docs/current/datatype.html
 \d -- to describe teh db, or specific tables for example.
 \d table_name -- to give a list and info of it.
 
+\dt gives a list of only the tables.
+
+add the email column with varchar 150 to the person table.
+
+INSERT INTO person (
+    first_name,
+    last_name,
+    gender,
+    date_of_birth)
+VALUES ('Anne','Smith','FEMALE',DATE'1988-01-09');
+
+INSERT INTO person (
+    first_name,
+    last_name,
+    gender,
+    date_of_birth,
+    email)
+VALUES ('Jake','Jones','Male',DATE'1990-01-10','jake@gmail.com');
+
+for the email colummn:
+ALTER TABLE table_name
+ADD COLUMN new_column_name data_type constraint;
+
+ALTER TABLE table_name
+ALTER [ COLUMN ] column_name SET ( attribute_option = value [, ... ] )
