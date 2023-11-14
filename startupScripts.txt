@@ -5,3 +5,14 @@ cmd
 docker start pg2
 
 docker exec -it pg2 psql -U postgres
+
+doskey psql=docker exec -it pg2 psql -U postgres
+
+now it's just psql to connect to the db.
+
+/l
+
+
+/q
+
+
