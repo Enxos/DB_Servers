@@ -1,0 +1,7 @@
+Startup:
+
+cmd
+
+docker start pg2
+
+docker exec -it pg2 psql -U postgres
