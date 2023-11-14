@@ -16,3 +16,29 @@ now it's just psql to connect to the db.
 /q
 
 
+CREATE DATABASE test;
+
+DROP DATABASE test;
+
+\c -- to connect to the db.
+
+
+CREATE TABLE table_name (
+    Column name + data type + constraints if any
+)
+
+CREATE TABLE person (
+    id INT,
+    first_name VARCHAR (50),
+    last_name VARCHAR (50),
+    gender VARCHAR (7),
+    date of birth TIMESTAMP
+);
+
+Datatypes:
+https://www.postgresql.org/docs/current/datatype.html
+
+
+\d -- to describe teh db, or specific tables for example.
+\d table_name -- to give a list and info of it.
+
