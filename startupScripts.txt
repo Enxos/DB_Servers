@@ -94,3 +94,10 @@ test-# ;
   1 | Anne       | Smith     | Female | 1988-01-09    |
   2 | Jake       | Jones     | Male   | 1990-01-10    | jake@gmail.com
 (2 rows)
+
+First try editing data in the table:
+UPDATE person WHERE gender=Male SET date_of_birth=1990-12-31;
+ERROR:  syntax error at or near "WHERE"
+LINE 1: UPDATE person WHERE gender=Male SET date_of_birth=1990-12-31...
+                      ^
+                      
