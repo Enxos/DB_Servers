@@ -117,3 +117,7 @@ test=# SELECT * FROM person;
 (2 rows)
 
 http://www.mockaroo.com/ for data generation.
+
+ORDER BY - ASC / DESC;
+DISTINCT
+WHERE
