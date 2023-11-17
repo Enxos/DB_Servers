@@ -1,9 +1,9 @@
 create table person (
 	first_name VARCHAR(50) NOT NULL,
 	last_name VARCHAR(50) NOT NULL,
-	gender VARCHAR(50) NOT NULL,
+	gender VARCHAR(20) NOT NULL,
 	date_of_birth DATE NOT NULL,
-	email VARCHAR(50) NOT NULL,
+	email VARCHAR(150),
 	country_of_birth VARCHAR(50)
 );
 insert into person (first_name, last_name, gender, date_of_birth, email, country_of_birth) values ('Haslett', 'Chellingworth', 'Male', '1999-06-09', 'hchellingworth0@wordpress.org', 'China');
