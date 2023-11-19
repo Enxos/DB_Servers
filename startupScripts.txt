@@ -154,6 +154,16 @@ SELECT * FROM person WHERE country_of_birth LIKE 'P%';
 
 SELECT DISTINCT country_of_birth FROM person;
 SELECT country_of_birth FROM person GROUP BY country_of_birth;
-SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth;
+SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth ORDER BY country_of_birth;
+
+GROUP BY HAVING
+SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth HAVING COUNT(*) >= 40 ORDER BY country_of_birth;
+
+Aggregate functions:
+ - COUNT
+ - MAX 
+ - MIN
+ - SUM
+ 
 
 
