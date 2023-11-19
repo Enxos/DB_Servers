@@ -121,3 +121,39 @@ http://www.mockaroo.com/ for data generation.
 ORDER BY - ASC / DESC;
 DISTINCT
 WHERE
+
+
+
+SELECT COUNT(*) FROM person WHERE gender = 'Male' OR gender = 'Female' AND country_of_birth = 'Poland';
+
+
+Where good stuff to filter down data in the WHERE clause:
+SELECT 1 = 1; -- // Comparison Operator, gives back true or false results.
+SELECT 1 >= 2; -- // f as in false.
+SELECT 1 <> 2; -- // t as in 1 is NOT equal to 2. // also case sensitive.
+
+
+LIMIT and OFFSET keyword.
+
+SELECT * FROM person LIMIT 10;
+SELECT * FROM person OFFSET 5 LIMIT 5;
+
+FETCH -- // original SQL limit function. as in the SEQUEL Standard.
+SELECT * FROM person OFFSET 5 FETCH FIRST 5 ROW ONLY;
+
+IN keyword, array of values, and then returns the querry matching those values.
+SELECT * FROM person WHERE country_of_birth IN ('China','Brazil','France');
+
+SELECT * FROM person
+WHERE date_of_birth
+BETWEEN DATE '2000-01-01' AND '2000-12-31';
+
+SELECT * FROM person WHERE email LIKE '%@google.%';
+SELECT * FROM person WHERE email LIKE '________@google.%';
+SELECT * FROM person WHERE country_of_birth LIKE 'P%';
+
+SELECT DISTINCT country_of_birth FROM person;
+SELECT country_of_birth FROM person GROUP BY country_of_birth;
+SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth;
+
+
