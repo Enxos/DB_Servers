@@ -214,3 +214,6 @@ Work in progress:
 SELECT first_name, last_name, gender, country_of_birth, date_of_birth, EXTRACT AGE (YEAR FROM (NOW(), date_of_birth) AS age FROM person) LIMIT 5;
 
 SELECT AGE(NOW(), date_of_birth) AS age FROM person LIMIT 5;
+
+Google Bard:
+SELECT first_name, last_name, DATE_PART('years', AGE(NOW(), date_of_birth)) AS age_in_years FROM person LIMIT 5;
