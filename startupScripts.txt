@@ -164,6 +164,53 @@ Aggregate functions:
  - MAX 
  - MIN
  - SUM
- 
 
+SELECT * FROM car;
+SELECT MAX(price) FROM car;
+SELECT MIN(price) FROM car;
+SELECT AVG(price) FROM car;
 
+SELECT ROUND(AVG(price)) FROM car;
+
+SELECT make, model, MIN(price) FROM car GROUP BY make, model;
+SELECT make, MAX(price) FROM car GROUP BY make;
+
+SELECT make, ROUND(AVG(price)) FROM car GROUP BY make;
+
+SELECT SUM(price) FROM car;
+SELECT make, SUM(price) FROM car GROUP BY make;
+
+Working with dates:
+
+SELECT NOW();
+    - shows current date n time.
+SELECT NOW() - INTERVAL '1 YEAR';
+
+SELECT NOW() + INTERVAL '10 DAYS';
+
+SELECT NOW()::DATE + INTERVAL '10 MONTHS';
+    - gives the date without hours and such
+SELECT (NOW() + INTERVAL '10 MONTHS')::DATE;
+    - Gives the same date without hours and without empty timeframe fields.
+
+SELECT NOW();
+    - how to get actual year from this:
+SELECT EXTRACT (YEAR FROM NOW());
+SELECT EXTRACT (MONTH FROM NOW());
+SELECT EXTRACT (DAY FROM NOW());
+SELECT EXTRACT (DOW FROM NOW()); -- day of the week
+SELECT EXTRACT (CENTURY FROM NOW()); -- 21 -> twentyfirst. baby.
+
+SELECT first_name, last_name, gender, country_of_birth, date_of_birth, AGE(NOW(), date_of_birth) AS age FROM person LIMIT 5;
+
+Mukodik:
+SELECT AGE(NOW(), date_of_birth) AS age FROM person LIMIT 5;
+Now-bol a mostani ev:
+SELECT EXTRACT (YEAR FROM NOW());
+a now es a date of birth-ok:
+SELECT (NOW(), date_of_birth) FROM person LIMIT 5;
+
+Work in progress:
+SELECT first_name, last_name, gender, country_of_birth, date_of_birth, EXTRACT AGE (YEAR FROM (NOW(), date_of_birth) AS age FROM person) LIMIT 5;
+
+SELECT AGE(NOW(), date_of_birth) AS age FROM person LIMIT 5;
