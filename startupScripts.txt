@@ -217,3 +217,46 @@ SELECT AGE(NOW(), date_of_birth) AS age FROM person LIMIT 5;
 
 Google Bard:
 SELECT first_name, last_name, DATE_PART('years', AGE(NOW(), date_of_birth)) AS age_in_years FROM person LIMIT 5;
+
+
+person uniq ID = passport number, makes a perfect primary key.
+
+
+⌨️ (1:32:43) IN
+ ⌨️ (1:35:43) Between
+ ⌨️ (1:37:45) Like And iLike
+ ⌨️ (1:43:10) Group By
+ ⌨️ (1:46:41) Group By Having
+ ⌨️ (1:52:08) Adding New Table And Data Using Mockaroo
+ ⌨️ (1:55:40) Calculating Min, Max & Average
+ ⌨️ (1:59:48) Sum
+ ⌨️ (2:01:55) Basics of Arithmetic Operators
+ ⌨️ (2:05:59) Arithmetic Operators (ROUND)
+ ⌨️ (2:09:43) Alias
+ ⌨️ (2:12:32) Coalesce
+ ⌨️ (2:16:15) NULLIF
+ ⌨️ (2:20:21) Timestamps And Dates Course
+ ⌨️ (2:23:21) Adding And Subtracting With Dates
+ ⌨️ (2:25:58) Extracting Fields From Timestamp
+ ⌨️ (2:27:28) Age Function
+ ⌨️ (2:29:24) What Are Primary Keys
+ ⌨️ (2:31:23) Understanding Primary Keys
+ ⌨️ (2:36:26) Adding Primary Key
+ ⌨️ (2:40:55) Unique Constraints
+ ⌨️ (2:49:15) Check Constraints
+ ⌨️ (2:54:45) How to Delete Records
+ ⌨️ (3:01:36) How to Update Records
+ ⌨️ (3:05:55) On Conflict Do Nothing
+ ⌨️ (3:11:09) Upsert
+ ⌨️ (3:16:41) What Is A Relationship/Foreign Keys
+ ⌨️ (3:19:48) Adding Relationship Between Tables
+ ⌨️ (3:25:04) Updating Foreign Keys Columns
+ ⌨️ (3:29:30) Inner Joins
+ ⌨️ (3:35:17) Left Joins
+ ⌨️ (3:40:53) Deleting Records With Foreign Keys
+ ⌨️ (3:47:27) Exporting Query Results to CSV
+ ⌨️ (3:50:42) Serial & Sequences
+ ⌨️ (3:57:18) Extensions
+ ⌨️ (3:59:39) Understanding UUID Data Type
+ ⌨️ (4:05:54) UUID As Primary Keys
+ ⌨️ (4:16:30) Conclusion
