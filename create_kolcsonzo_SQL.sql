@@ -5,7 +5,6 @@ DROP TABLE alkalmazottak;
 DROP TABLE helyszinek;
 DROP TABLE kategoriak;
 
-
 create table autok (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
 	make VARCHAR(100) NOT NULL,
@@ -13,7 +12,7 @@ create table autok (
 	price NUMERIC(19, 2) NOT NULL
 );
 
-create table person (
+create table felhasznalok (
     id BIGSERIAL NOT NULL PRIMARY KEY,
 	first_name VARCHAR(50) NOT NULL,
 	last_name VARCHAR(50) NOT NULL,
@@ -24,6 +23,22 @@ create table person (
 	car_id BIGINT REFERENCES car (id),
 	UNIQUE(email),
     UNIQUE(car_id)
+);
+
+create table kolcsonzesek (
+
+);
+
+create table alkalmazottak (
+
+);
+
+create table helyszinek (
+
+);
+
+create table kategoriak (
+
 );
 
 insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth) values ('Fernanda', 'Beardon', 'Female', 'fernandab@is.gd', '1953-10-28', 'Comoros');

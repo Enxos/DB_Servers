@@ -60,7 +60,7 @@ objects?
  - ID
  - email
  - username?
- - password hashh
+ - password hash
  - First name
  - Last name
  - contact phone Nr.
@@ -77,6 +77,13 @@ objects?
  - actual end date
  - pick up location
  - drop off location
+
+#### alkalmazottak table
+ - uniq ID - key
+ - username
+ - password hash
+ - Access lvl
+ - 
 
 #### helyszinek table
  - uniq ID - key - helyszin_ID
