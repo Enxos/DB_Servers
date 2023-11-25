@@ -310,3 +310,4 @@ SELECT person.first_name, car.make, car.model, car.price FROM person JOIN car ON
 
 LEFT JOINS - same combination of two tables, but includes everything from the left side.
 i.e. returns all the records even if there is no match, but only gives data from the 2. table in case there is a link.
+SELECT * FROM person LEFT JOIN car ON person.car_id = car.id;
