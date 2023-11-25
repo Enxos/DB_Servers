@@ -7,9 +7,12 @@ DROP TABLE kategoriak;
 
 create table autok (
 	id BIGSERIAL NOT NULL PRIMARY KEY,
-	make VARCHAR(100) NOT NULL,
+    rendszam ,
+    old rendszamok array - lista,
+	color NUMERIC(19, 2) NOT NULL,
+    make VARCHAR(100) NOT NULL,
 	model VARCHAR(100) NOT NULL,
-	price NUMERIC(19, 2) NOT NULL
+	color NUMERIC(19, 2) NOT NULL
 );
 
 create table felhasznalok (
@@ -26,18 +29,26 @@ create table felhasznalok (
 );
 
 create table kolcsonzesek (
+	id BIGSERIAL NOT NULL PRIMARY KEY,
+
 
 );
 
 create table alkalmazottak (
+	id BIGSERIAL NOT NULL PRIMARY KEY,
+
 
 );
 
 create table helyszinek (
+	id BIGSERIAL NOT NULL PRIMARY KEY,
+
 
 );
 
 create table kategoriak (
+	id BIGSERIAL NOT NULL PRIMARY KEY,
+
 
 );
 
