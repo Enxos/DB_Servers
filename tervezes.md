@@ -1,5 +1,8 @@
 # Plan
 
+Graphic db planner tool:
+https://dbdiagram.io/d 
+
 F:\School\GDF\db_servers_2023_2
 
 Beadandó feladat:
