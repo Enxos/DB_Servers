@@ -1,0 +1,149 @@
+-- Létrehozzuk az adatbázist
+CREATE DATABASE autokolcsonzo_fcomho;
+
+-- Csatlakozunk az adatbázishoz
+\c autokolcsonzo_fcomho;
+
+-- Létrehozzuk a táblákat
+-- Ügyfelek tábla
+CREATE TABLE ugyfelek (
+  id SERIAL PRIMARY KEY,
+  nev VARCHAR(50) NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  telefonszam VARCHAR(20) NOT NULL,
+  varos VARCHAR(50)
+);
+
+-- Autók tábla
+CREATE TABLE jarmuvek (
+  id SERIAL PRIMARY KEY,
+  rendszam VARCHAR(8) NOT NULL,
+  marka VARCHAR(50) NOT NULL,
+  tipus VARCHAR(50) NOT NULL,
+  ar INT NOT NULL,
+  kategoria VARCHAR(20)
+);
+
+-- Kölcsönzések tábla
+CREATE TABLE kolcsonzesek (
+  id SERIAL PRIMARY KEY,
+  ugyfel_id INT REFERENCES ugyfelek(id) NOT NULL,
+  auto_id INT REFERENCES jarmuvek(id) NOT NULL,
+  kezdes DATE NOT NULL,
+  vege DATE NOT NULL,
+  hossz INT NOT NULL,
+  ar INT NOT NULL
+);
+
+-- Számlák tábla
+CREATE TABLE szamlak (
+  id SERIAL PRIMARY KEY,
+  kolcsonzes_id INT REFERENCES kolcsonzesek(id) NOT NULL,
+  osszeg INT NOT NULL,
+  fizetett BOOL NOT NULL
+);
+
+-- Automatizálási tárolt eljárások
+-- Új kölcsönzés létrehozása
+CREATE PROCEDURE uj_kolcsonzes (
+  ugyfel_id INT,
+  auto_id INT,
+  kezdes DATE,
+  vege DATE
+)
+AS
+BEGIN
+  INSERT INTO kolcsonzesek (ugyfel_id, auto_id, kezdes, vege, hossz, ar)
+  VALUES (ugyfel_id, auto_id, kezdes, vege, (vege - kezdes) DAY,
+           (ar * (vege - kezdes) DAY)
+          );
+END;
+
+-- Kölcsönzés hosszának módosítása
+CREATE PROCEDURE kolcsonzes_hossz_modositas (
+  kolcsonzes_id INT,
+  hossz INT
+)
+AS
+BEGIN
+  UPDATE kolcsonzesek
+  SET hossz = hossz
+  WHERE id = kolcsonzes_id;
+END;
+
+-- Kölcsönzés törlése
+CREATE PROCEDURE kolcsonzes_torles (
+  kolcsonzes_id INT
+)
+AS
+BEGIN
+  DELETE FROM kolcsonzesek
+  WHERE id = kolcsonzes_id;
+END;
+
+-- Számla létrehozása
+CREATE PROCEDURE szamla_letrehozas (
+  kolcsonzes_id INT
+)
+AS
+BEGIN
+  INSERT INTO szamlak (kolcsonzes_id, osszeg, fizetett)
+  VALUES (kolcsonzes_id,
+           (kolcsonzesek.ar * kolcsonzesek.hossz) + (kolcsonzesek.ar * 0.1),
+           False);
+END;
+
+-- Fizetés rögzítése
+CREATE PROCEDURE fizetes_rogzites (
+  szamla_id INT
+)
+AS
+BEGIN
+  UPDATE szamlak
+  SET fizetett = True
+  WHERE id = szamla_id;
+END;
+
+-- Indexek létrehozása a tervezett lekérdezésekhez
+CREATE INDEX idx_kolcsonzesek_ugyfel_id ON kolcsonzesek(ugyfel_id);
+
+CREATE INDEX idx_kolcsonzesek_auto_id ON kolcsonzesek(auto_id);
+
+-- az SQL INSERTEK
+INSERT INTO ugyfelek (nev, email, telefonszam, varos)
+VALUES ('Géza Gúnár', 'john.doe@example.com', '123456789', 'Budapest');
+
+INSERT INTO ugyfelek (nev, email, telefonszam, varos)
+VALUES ('Béla Bástya', 'jane.doe@example.com', '987654321', 'Debrecen');
+
+INSERT INTO jarmuvek (rendszam, marka, tipus, ar, kategoria)
+VALUES ('ABC-123', 'Volkswagen', 'Golf', 10000, 'kompakt');
+
+INSERT INTO jarmuvek (rendszam, marka, tipus, ar, kategoria)
+VALUES ('DEF-456', 'Audi', 'A4', 20000, 'középkategória');
+
+INSERT INTO kolcsonzesek (ugyfel_id, auto_id, kezdes, vege)
+VALUES (1, 1, '2023-12-07', '2023-12-14');
+
+INSERT INTO kolcsonzesek (ugyfel_id, auto_id, kezdes, vege)
+VALUES (2, 2, '2023-12-15', '2023-12-21');
+
+INSERT INTO szamlak (kolcsonzes_id, osszeg, fizetett)
+VALUES (1, 11000, True);
+
+INSERT INTO szamlak (kolcsonzes_id, osszeg, fizetett)
+VALUES (2, 22000, False);
+
+-- Lekérdezés a jelenleg elérhető járművekről:
+SELECT *
+FROM autok
+WHERE id NOT IN (
+  SELECT auto_id
+  FROM kolcsonzesek
+  WHERE jelenleg_elerheto = FALSE
+);
+
+-- Ügyfél id alapján a kölcsönzési előzmények:
+SELECT *
+FROM kolcsonzesek
+WHERE ugyfel_id = 1;
