@@ -43,6 +43,63 @@ CREATE TABLE szamlak (
   fizetett BOOL NOT NULL
 );
 
+-- Indexek létrehozása a tervezett lekérdezésekhez
+CREATE INDEX idx_kolcsonzesek_ugyfel_id ON kolcsonzesek(ugyfel_id);
+
+CREATE INDEX idx_kolcsonzesek_auto_id ON kolcsonzesek(auto_id);
+
+-- az SQL INSERTEK
+INSERT INTO ugyfelek (nev, email, telefonszam, varos)
+VALUES ('Géza Gúnár', 'john.doe@example.com', '123456789', 'Budapest');
+
+INSERT INTO ugyfelek (nev, email, telefonszam, varos)
+VALUES ('Béla Bástya', 'jane.doe@example.com', '987654321', 'Debrecen');
+
+INSERT INTO jarmuvek (rendszam, marka, tipus, ar, kategoria)
+VALUES ('ABC-123', 'Volkswagen', 'Golf', 10000, 'kompakt');
+
+INSERT INTO jarmuvek (rendszam, marka, tipus, ar, kategoria)
+VALUES ('DEF-456', 'Audi', 'A4', 20000, 'középkategória');
+
+INSERT INTO kolcsonzesek (ugyfel_id, auto_id, kezdes, vege)
+VALUES (1, 1, '2023-12-07', '2023-12-14');
+
+INSERT INTO kolcsonzesek (ugyfel_id, auto_id, kezdes, vege)
+VALUES (2, 2, '2023-12-15', '2023-12-21');
+
+INSERT INTO szamlak (kolcsonzes_id, osszeg, fizetett)
+VALUES (1, 11000, True);
+
+INSERT INTO szamlak (kolcsonzes_id, osszeg, fizetett)
+VALUES (2, 22000, False);
+
+-- Lekérdezés a jelenleg elérhető járművekről:
+ALTER TABLE jarmuvek
+ADD COLUMN jelenleg_elerheto BOOLEAN NOT NULL DEFAULT TRUE;
+
+SELECT *
+FROM jarmuvek
+WHERE id NOT IN (
+  SELECT auto_id
+  FROM kolcsonzesek
+  WHERE jelenleg_elerheto = FALSE
+);
+
+-- Ügyfél id alapján a kölcsönzési előzmények:
+SELECT *
+FROM kolcsonzesek
+WHERE ugyfel_id = 1;
+
+-- Trigger ami automatikusan frissíti a jarmuvek állapotát amikor egy kölcsönzés történik:
+CREATE TRIGGER auto_status_trigger
+AFTER INSERT ON kolcsonzesek
+FOR EACH ROW
+BEGIN
+  UPDATE jarmuvek
+  SET jelenleg_elerheto = FALSE
+  WHERE id = NEW.auto_id;
+END;
+
 -- Automatizálási tárolt eljárások
 -- Új kölcsönzés létrehozása
 CREATE PROCEDURE uj_kolcsonzes (
@@ -104,46 +161,26 @@ BEGIN
   WHERE id = szamla_id;
 END;
 
--- Indexek létrehozása a tervezett lekérdezésekhez
-CREATE INDEX idx_kolcsonzesek_ugyfel_id ON kolcsonzesek(ugyfel_id);
+-- Particionálás
+ALTER TABLE ugyfelek
+ADD COLUMN megye VARCHAR(255);
 
-CREATE INDEX idx_kolcsonzesek_auto_id ON kolcsonzesek(auto_id);
-
--- az SQL INSERTEK
-INSERT INTO ugyfelek (nev, email, telefonszam, varos)
-VALUES ('Géza Gúnár', 'john.doe@example.com', '123456789', 'Budapest');
-
-INSERT INTO ugyfelek (nev, email, telefonszam, varos)
-VALUES ('Béla Bástya', 'jane.doe@example.com', '987654321', 'Debrecen');
-
-INSERT INTO jarmuvek (rendszam, marka, tipus, ar, kategoria)
-VALUES ('ABC-123', 'Volkswagen', 'Golf', 10000, 'kompakt');
-
-INSERT INTO jarmuvek (rendszam, marka, tipus, ar, kategoria)
-VALUES ('DEF-456', 'Audi', 'A4', 20000, 'középkategória');
-
-INSERT INTO kolcsonzesek (ugyfel_id, auto_id, kezdes, vege)
-VALUES (1, 1, '2023-12-07', '2023-12-14');
-
-INSERT INTO kolcsonzesek (ugyfel_id, auto_id, kezdes, vege)
-VALUES (2, 2, '2023-12-15', '2023-12-21');
-
-INSERT INTO szamlak (kolcsonzes_id, osszeg, fizetett)
-VALUES (1, 11000, True);
-
-INSERT INTO szamlak (kolcsonzes_id, osszeg, fizetett)
-VALUES (2, 22000, False);
-
--- Lekérdezés a jelenleg elérhető járművekről:
-SELECT *
-FROM autok
-WHERE id NOT IN (
-  SELECT auto_id
-  FROM kolcsonzesek
-  WHERE jelenleg_elerheto = FALSE
+CREATE TABLE ugyfelek_part (
+  id SERIAL PRIMARY KEY,
+  nev VARCHAR(255),
+  email VARCHAR(255),
+  telefonszam VARCHAR(255),
+  megye VARCHAR(255),
+  constraint part_megye
+    partitioning by list (megye)
+      (
+        partition part_budapest values ('Budapest'),
+        partition part_pest values ('Pest'),
+        partition part_tobbi values ('Tobbi')
+      )
 );
 
--- Ügyfél id alapján a kölcsönzési előzmények:
+-- Particionált táblához való hozzáféréshez a következő formátumban kell megadni a partíció nevét:
 SELECT *
-FROM kolcsonzesek
-WHERE ugyfel_id = 1;
+FROM ugyfelek_part
+WHERE megye = 'Budapest';
